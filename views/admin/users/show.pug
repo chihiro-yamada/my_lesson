@@ -1,0 +1,22 @@
+extends ../../layout
+
+block content 
+  h1 
+    a(href="/admin/users") ユーザー管理
+    | / #{user.displayName}
+
+  dl
+    dt id
+    dd= user.id
+    dt username
+    dd= user.username
+    dt email
+    dd= user.email
+    dt displayName
+    dd= user.displayName
+    dt role
+    dd= __(`models.User.roles.${user.role}`)
+    dt createdAt
+    dd= helpers.formatDateTime(user.createdAt)
+    dt updatedAt
+    dd= helpers.formatDateTime(user.updatedAt)

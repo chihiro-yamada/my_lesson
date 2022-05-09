@@ -1,0 +1,18 @@
+extends ../layout
+
+block content 
+  h1 Example
+
+  .actions
+    a(href="/examples/create") 新規作成
+
+  table 
+    tbody 
+      each example in examples
+        tr
+          td= example.id
+          td= example.title
+          td
+            a(href=`/examples/${example.id}`) 詳細
+            a(href=`/examples/${example.id}/edit`) 編集
+            a(href=`/examples/${example.id}?_method=delete&_csrf=${csrfToken}`) 削除

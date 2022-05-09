@@ -1,0 +1,14 @@
+{
+	"AppTitle": "ExpressMVC",
+	"views": {
+		"Profile": "プロフィール"
+	},
+	"models": {
+		"User": {
+			"roles": {
+				"0": "通常",
+				"1": "管理者"
+			}
+		}
+	}
+}

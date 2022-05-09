@@ -1,0 +1,33 @@
+version: "3"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.development
+    command: ./boot.sh
+    ports:
+      - 3000:3000
+    links:
+      - db
+    tty: true
+    environment:
+      - DEBUG=app:*,express-mvc:*,route:*
+      - SESSION_SECRET=sercet
+      - SSL_ENABLED=false
+      - DB_USERNAME=postgres
+      - DB_PASS=password
+      - DB_DATABASE=express_mvc_development
+      - DB_HOST=db
+    volumes:
+      - .:/work:delegated
+      - node_modules:/work/node_modules
+  db:
+    image: postgres:11-alpine
+    environment:
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+  node_modules:

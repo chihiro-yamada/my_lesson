@@ -1,0 +1,34 @@
+doctype html
+html
+  head
+    title= title
+    meta(name="csrf-token", content!=csrfToken)
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    .wrapper
+      header
+        h1 
+          a(href="/")= __('AppTitle')
+        nav 
+          if(currentUser)
+            span=__(`models.User.roles.${currentUser.role}`)
+            | : #{currentUser.displayName}&nbsp;
+            if(currentUser.isAdmin())
+              a(href="/admin/users") ユーザー管理
+              | &nbsp;
+            a(href="/logout") Logout
+          else 
+            a(href="/login") Login  
+          |  
+          a(href="/user/edit") プロフィール編集
+
+
+      if flashMessages 
+        if flashMessages.info.length > 0
+          each msg in flashMessages.info
+            .flash-message.info-message= msg
+        if flashMessages.alert.length > 0
+          each msg in flashMessages.alert
+            .flash-message.alert-message= msg
+
+      block content

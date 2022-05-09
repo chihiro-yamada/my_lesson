@@ -1,0 +1,52 @@
+body {
+  padding: 1em 0;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+header>nav {
+  text-align: right;
+}
+
+.wrapper {
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.errors {
+  color: darkred;
+  background-color: pink;
+  list-style: none;
+  padding: 1em;
+}
+
+.flash-message {
+  padding: .5em;
+  font-weight: bold;
+}
+
+.flash-message.info-message {
+  color: darkgreen;
+  background-color: lightgreen;
+}
+
+.flash-message.alert-message {
+  color: darkred;
+  background-color: pink;
+}
+
+.box {
+  max-width: 480px;
+  width: 100%;
+  margin: 0 auto;
+  border: 1px lightgray solid;
+  padding: 1em;
+}
+
+.actions {
+  text-align: right;
+}

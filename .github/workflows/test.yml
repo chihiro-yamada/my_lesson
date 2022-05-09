@@ -1,0 +1,62 @@
+name: jest
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+env:
+  NODE_ENV: test
+  DB_USERNAME: postgres
+  DB_PASS: password
+  DB_DATABASE: test
+  DB_HOST: localhost
+  DB_PORT: 5432
+  TZ: Asia/Tokyo
+  SESSION_SECRET: jugemujugemu
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:12
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: test
+          TZ: Asia/Tokyo
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      # @see https://docs.github.com/en/actions/guides/building-and-testing-nodejs#example-caching-dependencies    
+      - name: Cache Node.js modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.OS }}-node-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.OS }}-node-
+            ${{ runner.OS }}-          
+      - run: npm install
+      - run: npm run build --if-present
+      - run: npm run lint
+      - run: npm test
+      - name: Run test
+        uses: mattallty/jest-github-action@v1.0.3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

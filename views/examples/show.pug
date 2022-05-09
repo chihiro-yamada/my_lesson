@@ -1,0 +1,12 @@
+extends ../layout
+
+block content 
+  h1 
+    a(href="/examples") Example
+    | / show
+
+  dl
+    dt title
+    dd= example.title
+    dt body
+    dd= example.body

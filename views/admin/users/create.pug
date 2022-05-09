@@ -1,0 +1,10 @@
+extends ../../layout
+
+include ./_form
+
+block content 
+  h1 
+    a(href="/admin/users") ユーザー管理
+    | / ユーザー作成
+
+  +admin_user_form(`/admin/users`, 'post', user, err)

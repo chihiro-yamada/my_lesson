@@ -1,0 +1,24 @@
+extends layout 
+
+block content 
+  - if(err)
+    - if(err.errors)
+      ul.errors
+        each error in err.errors
+          li= error.message
+    - else
+      ul.errors
+        li= err.message
+
+  h2 ログイン
+  form(action="/login" method="post")
+    _csrf
+
+    div
+      label Username:
+      input(type="text", name="username")
+    div
+      label password:
+      input(type="password", name="password", value=(process.env.NODE_ENV!='production') ? "password": '')
+    div
+      input(type="submit", value="ログイン")

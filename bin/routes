@@ -1,0 +1,6 @@
+#!/usr/bin/env node
+
+const app = require('../app');
+const displayRoutes = require('express-routemap');
+
+displayRoutes(app);

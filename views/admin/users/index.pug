@@ -1,0 +1,33 @@
+extends ../../layout
+
+block content 
+  h1 ユーザー管理
+
+  .actions
+    a(href="/admin/users/create") 新規作成
+
+  table(border=1)
+    thead 
+      tr 
+        th id 
+        th username 
+        th email 
+        th displayName 
+        th role 
+        th createdAt 
+        th updatedAt
+        th actions
+    tbody 
+      each user in users
+        tr
+          td= user.id
+          td= user.username
+          td= user.email
+          td= user.displayName 
+          td= __(`models.User.roles.${user.role}`)
+          td= helpers.formatDateTime(user.createdAt)
+          td= helpers.formatDateTime(user.updatedAt)
+          td
+            a(href=`/admin/users/${user.id}`) 詳細
+            a(href=`/admin/users/${user.id}/edit`) 編集
+            a(href=`/admin/users/${user.id}?_method=delete&_csrf=${csrfToken}`) 削除

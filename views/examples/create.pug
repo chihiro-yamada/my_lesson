@@ -1,0 +1,18 @@
+extends ../layout
+
+block content 
+  h1 
+    a(href="/examples") Example
+    | / create
+
+  form.box(action="/examples", method="post")
+    _csrf
+    
+    div
+      label(for="title") title
+      input#title(name="title", value=example.body)
+    div  
+      label(for="body") body
+      textarea#body(name="body")=example.body
+    div.actions
+      input(type="submit")
