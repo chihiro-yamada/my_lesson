@@ -41,8 +41,7 @@
     "pg-native": "^3.0.0",
     "pluralize": "^8.0.0",
     "pug": "3.0.2",
-    "sequelize": "^6.6.2",
-    "sequelize-cli": "^6.2.0",
+    "sequelize": "^6.19.0",
     "utf-8-validate": "^5.0.5"
   },
   "devDependencies": {
@@ -53,6 +52,7 @@
     "jest": "^27.4.7",
     "nodemon": "^2.0.12",
     "pug-lint": "^2.6.0",
+    "sequelize-cli": "^6.4.1",
     "supertest": "^6.1.6"
   }
 }
