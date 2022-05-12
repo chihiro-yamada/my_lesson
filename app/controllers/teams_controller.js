@@ -6,9 +6,9 @@ const team = require('../models/team');
 class TeamsController extends Controller {
   // GET /create
   async create(req, res) {
-    res.render('teams/create', { team});
+    res.render('teams/create', { team });
   }
-// POST /
+  // POST /
   async store(req, res) {
     try {
       const user = req.user;
@@ -27,17 +27,17 @@ class TeamsController extends Controller {
       }
     }
   }
-// GET /:id
+  // GET /:id
   async show(req, res) {
     const team = await models.Team.findByPk(req.params.team);
-    res.render('teams/show', { team: team});
+    res.render('teams/show', { team: team });
   }
-// GET /:id/edit
+  // GET /:id/edit
   async edit(req, res) {
     const team = await models.Team.findByPk(req.params.team);
-    res.render('teams/edit', { team: team});
+    res.render('teams/edit', { team: team });
   }
-// PUT or PATCH /:id
+  // PUT or PATCH /:id
   async update(req, res) {
     try {
       const team = await models.Team.findByPk(req.body.id); //---[1]
