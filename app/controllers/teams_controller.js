@@ -29,12 +29,12 @@ class TeamsController extends Controller {
   }
 // GET /:id
   async show(req, res) {
-    const team = await models.Team.findByPk(req.params.id);
+    const team = await models.Team.findByPk(req.params.team);
     res.render('teams/show', { team: team});
   }
 // GET /:id/edit
   async edit(req, res) {
-    const team = await models.Team.findByPk(req.params.id);
+    const team = await models.Team.findByPk(req.params.team);
     res.render('teams/edit', { team: team});
   }
 // PUT or PATCH /:id

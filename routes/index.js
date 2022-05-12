@@ -21,7 +21,5 @@ const adminRoute = route.sub('/admin', forceLogin, forceAdmin);
 adminRoute.resource('users', 'admin/users_controller');
 
 //create teams
-route.resource('teams', { controller: 'teams_controller', only: ['create', 'store', 'update'] });
-route.get('/teams/:id', forceLogin, 'teams_controller@show');
-route.get('/teams/:id/edit', forceLogin, 'teams_controller@edit');
+route.resource('teams', { controller: 'teams_controller', only: ['create', 'store', 'show', 'edit',  'update'] });
 module.exports = route.router;
