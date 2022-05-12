@@ -6,7 +6,7 @@ const team = require('../models/team');
 class TeamsController extends Controller {
   // GET /create
   async create(req, res) {
-    res.render('teams/create', { team: { title: '', body: '' } });
+    res.render('teams/create', { team});
   }
 // POST /
   async store(req, res) {

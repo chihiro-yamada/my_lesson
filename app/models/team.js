@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         len: [0, 20],
       }
     },
-    ownerId: DataTypes.STRING
+    ownerId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Team',
