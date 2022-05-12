@@ -44,7 +44,7 @@ class TeamsController extends Controller {
       team.set(req.body);
       await team.save({ fields: ['name'] });
       await req.flash('info', `チーム名を${team.name}に変更しました`);
-      res.redirect(`/teams/${team.id}/edit`, { team: team });
+      res.redirect(`/teams/${team.id}/edit`);
     } catch(err) {
       if (err instanceof ValidationError) {
         res.render('teams/edit', { team: req.body, err });
