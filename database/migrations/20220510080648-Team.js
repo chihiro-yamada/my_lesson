@@ -1,11 +1,11 @@
 'use strict';
 
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface) {
     await queryInterface.renameColumn('Teams', 'teamname', 'name');
   },
 
-  async down (queryInterface, Sequelize) {
+  async down() {
     /**
      * Add reverting commands here.
      *
