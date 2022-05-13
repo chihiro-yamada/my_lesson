@@ -6,7 +6,7 @@ const task = require('../models/task');
 class TasksController extends Controller {
   // GET /create
   async create(req, res) {
-    const team = req.params.team
+    const team = req.params.team;
     res.render('tasks/create', { team: team, task: task });
   }
 
@@ -32,7 +32,7 @@ class TasksController extends Controller {
   }
   // GET /:id/edit
   async edit(req, res) {
-    const team = req.params.team
+    const team = req.params.team;
     const task = await models.Task.findByPk(req.params.task);
     res.render('tasks/edit', { team: team, task: task });
   }
