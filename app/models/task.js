@@ -26,7 +26,10 @@ module.exports = (sequelize, DataTypes) => {
         len: [0, 20],
       },
     },
-    teamId: DataTypes.INTEGER,
+    teamId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
     status: DataTypes.INTEGER
   }, {
     sequelize,
