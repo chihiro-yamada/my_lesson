@@ -1,0 +1,21 @@
+extends ../layout
+
+block content 
+  h1 タスクの編集
+  - if(err)
+    - const errors = err.errors
+    ul.errors
+      each error in errors
+        li= error.message
+  form(action=`/teams/${team}/tasks/${task.id}`, method="post")
+    _csrf
+    _method put
+    input(type='hidden', name='id', value=task.id)
+    div
+      label(for="title") タイトル
+      input#title(name="title", value=task.title)
+    div  
+      label(for="body") 内容
+      textarea#body(name="body")=task.body
+    div.actions-tasks
+      input(type="submit")
