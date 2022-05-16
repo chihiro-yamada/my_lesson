@@ -13,6 +13,16 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'teamId',
         as: 'OwnTasks'
       });
+      this.Members = this.hasMany(models.Member, {
+        foreignKey: 'teamId',
+        as: 'OwnMembers'
+      });
+      this.JoinUsers = this.belongsToMany(models.User, {
+        through: 'Member',
+        foreignKey: 'teamId',
+        otherKey: 'userId',
+        as: 'JoinUsers'
+      });
     }
   }
   Team.init({
