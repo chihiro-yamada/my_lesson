@@ -6,9 +6,9 @@ class MembersController extends Controller {
   // GET /create
   async create(req, res) {
     const team = await models.Team.findByPk(req.params.team);
-    const users= await models.User.findAll();
-    const joinUsers= await team.getJoinUsers();
-    res.render('members/create', { team: team, users: users, joinUsers: joinUsers});
+    const users = await models.User.findAll();
+    const joinUsers = await team.getJoinUsers();
+    res.render('members/create', { team: team, users: users, joinUsers: joinUsers });
   }
 
   // POST /
@@ -22,7 +22,7 @@ class MembersController extends Controller {
       res.redirect(`/teams/${member.teamId}/members`);
     } catch (err) {
       if (err instanceof ValidationError) {
-        res.render(`/teams/${member.teamId}/members`, { err });
+        res.render('members/create', { err });
       } else {
         throw err;
       }
