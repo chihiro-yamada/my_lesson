@@ -35,7 +35,7 @@ class TeamsController extends Controller {
   // GET /:id
   async show(req, res) {
     const team = await models.Team.findByPk(req.params.team);
-    const tasks = await team.getOwnTasks();
+    const tasks = await team.getOwnTasks({ include: 'assignUser' });
     res.render('teams/show', { team: team, tasks: tasks });
   }
   // GET /:id/edit
