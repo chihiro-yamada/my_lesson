@@ -2,11 +2,11 @@ extends ../layout
 block content
   h1 #{team.name}
   p 
-    a(href=`/teams/${team.id}/tasks/create`) 新規タスクの作成
+    a(href=`/manager/teams/${team.id}/tasks/create`) 新規タスクの作成
   p 
-    a(href=`/teams/${team.id}/members`) メンバー管理
+    a(href=`/manager/teams/${team.id}/members`) メンバー管理
   p  
-    a(href=`/teams/${team.id}/edit`) 編集
+    a(href=`/manager/teams/${team.id}/edit`) 編集
 
   h2 タスク一覧
   table(border=1)
@@ -25,4 +25,4 @@ block content
           td= task.assignUser.displayName
           td= helpers.formatDateTime(task.createdAt)
           td
-            a(href=`/teams/${team.id}/tasks/${task.id}/edit`) 編集
+            a(href=`/manager/teams/${team.id}/tasks/${task.id}/edit`) 編集

@@ -7,7 +7,7 @@ block content
     ul.errors
       each error in errors
         li= error.message
-  form(action=`/teams/${teamId}/tasks/${task.id}`, method="post")
+  form(action=`/manager/teams/${teamId}/tasks/${task.id}`, method="post")
     _csrf
     _method put
     input(type='hidden', name='id', value=task.id)

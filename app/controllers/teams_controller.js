@@ -23,7 +23,7 @@ class TeamsController extends Controller {
       });
       await member.save({ fields: ['teamId', 'userId'] });
       await req.flash('info', `新規チーム${team.name}保存しました`);
-      res.redirect(`/teams/${team.id}`);
+      res.redirect(`/manager/teams/${team.id}`);
     } catch (err) {
       if (err instanceof ValidationError) {
         res.render('teams/create', { team: req.body, err });
@@ -50,7 +50,7 @@ class TeamsController extends Controller {
       team.set(req.body);
       await team.save({ fields: ['name'] });
       await req.flash('info', `チーム名を${team.name}に変更しました`);
-      res.redirect(`/teams/${team.id}/edit`);
+      res.redirect(`/manager/teams/${team.id}/edit`);
     } catch(err) {
       if (err instanceof ValidationError) {
         res.render('teams/edit', { team: req.body, err });

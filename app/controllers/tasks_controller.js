@@ -27,7 +27,7 @@ class TasksController extends Controller {
       
       await task.save({ fields: ['title', 'body', 'teamId', 'status', 'creatorId', 'assigneeId'] });
       await req.flash('info', `新規チーム${task.title}保存しました`);
-      res.redirect(`/teams/${task.teamId}`);
+      res.redirect(`/manager/teams/${task.teamId}`);
     } catch (err) {
       if (err instanceof ValidationError) {
         res.render('tasks/create', { task: req.body, err });
@@ -52,7 +52,7 @@ class TasksController extends Controller {
       task.set(req.body);
       await task.save({ fields: ['title', 'body', 'assigneeId'] });
       await req.flash('info', `${task.title}を変更しました`);
-      res.redirect(`/teams/${task.teamId}`);
+      res.redirect(`/manager/teams/${task.teamId}`);
     } catch (err) {
       if (err instanceof ValidationError) {
         res.render('tasks/edit', { task: req.body, err });
