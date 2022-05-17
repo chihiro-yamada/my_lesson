@@ -29,5 +29,4 @@ const teamRoute = route.sub('/teams/:team', forceLogin);
 teamRoute.resource('tasks', { controller: 'tasks_controller', only: ['create', 'store', 'edit', 'update'] });
 
 //members routes
-teamRoute.get('/members', forceLogin, 'members_controller@create');
-teamRoute.post('/members', forceLogin, 'members_controller@store');
+teamRoute.resource('members', forceLogin, { controller: 'members_controller', only: ['index', 'store'] });

@@ -14,7 +14,6 @@ block content
           option(value=user.id) #{user.displayName}
 
       input(type="submit", value="追加")
-      
     h2 メンバー一覧
     table(border=1)
       thead 
@@ -25,4 +24,4 @@ block content
         each joinUser in joinUsers
           tr
             td メンバー
-            td= joinUser.displayName
+            td= joinUser.OwnerUser.displayName
