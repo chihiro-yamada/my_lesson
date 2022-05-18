@@ -24,22 +24,16 @@ adminRoute.resource('users', 'admin/users_controller');
 const managerRoute = route.sub('/manager', forceLogin);
 
 //team routes
-route.resource('teams', forceLogin, { controller: 'teams_controller', only: ['create', 'store', 'show', 'edit', 'update'] });
+route.resource('teams', forceLogin, { controller: 'teams_controller', only: ['create', 'store'] });
 managerRoute.resource('teams', { controller: 'manager/teams_controller', only: ['show', 'edit', 'update'] });
-
-
-//teamのURL階層の作成
-const teamRoute = route.sub('/teams/:team', forceLogin);
 
 //manager/teamのURL階層の作成
 const teamManagerRoute = managerRoute.sub('/teams/:team');
 
 //tasks routes
-teamRoute.resource('tasks', { controller: 'tasks_controller', only: ['create', 'store', 'edit', 'update'] });
 teamManagerRoute.resource('tasks', { controller: 'manager/tasks_controller', only: ['create', 'store', 'edit', 'update'] });
 
 //members routes
-teamRoute.resource('members', { controller: 'members_controller', only: ['index', 'store'] });
 teamManagerRoute.resource('members', { controller: 'manager/members_controller', only: ['index', 'store'] });
 
 module.exports = route.router;
