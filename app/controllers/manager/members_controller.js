@@ -7,7 +7,7 @@ class MembersController extends Controller {
   async index(req, res) {
     const team = await models.Team.findByPk(req.params.team);
     const users = await models.User.findAll();
-    const joinUsers = await team.getJoinUsers();
+    const joinUsers = await team.getOwnMembers({ include: 'OwnerUser' });
     res.render('manager/members/index', { team: team, users: users, joinUsers: joinUsers });
   }
 
