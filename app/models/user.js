@@ -19,6 +19,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'ownerId',
         as: 'OwnTeams'
       });
+      this.Members = this.hasMany(models.Member, {
+        foreignKey: 'userId',
+        as: 'userMembers'
+      });
     }
     static async generateHash(password) {
       return await bcrypt.hash(password, 10);

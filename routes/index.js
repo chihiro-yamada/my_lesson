@@ -27,3 +27,6 @@ module.exports = route.router;
 //tasks routes
 const teamRoute = route.sub('/teams/:team', forceLogin);
 teamRoute.resource('tasks', { controller: 'tasks_controller', only: ['create', 'store', 'edit', 'update'] });
+
+//members routes
+teamRoute.resource('members', forceLogin, { controller: 'members_controller', only: ['index', 'store'] });

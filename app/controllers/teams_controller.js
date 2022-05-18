@@ -17,6 +17,11 @@ class TeamsController extends Controller {
         ownerId: user.id
       });
       await team.save({ fields: ['name', 'ownerId'] });
+      const member = models.Member.build({
+        teamId: team.id, 
+        userId: user.id
+      });
+      await member.save({ fields: ['teamId', 'userId'] });
       await req.flash('info', `新規チーム${team.name}保存しました`);
       res.redirect(`/teams/${team.id}`);
     } catch (err) {
