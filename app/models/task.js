@@ -9,6 +9,14 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'teamId',
         as: 'OwnerTeam'
       });
+      this.assignUser = this.belongsTo(models.User, {
+        foreignKey: 'assigneeId',
+        as: 'assignUser'
+      });
+      this.createUser = this.belongsTo(models.User, {
+        foreignKey: 'creatorId',
+        as: 'createUser'
+      });
     }
   }
   Task.init({
@@ -30,7 +38,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    status: DataTypes.INTEGER
+    status: DataTypes.INTEGER,
+    creatorId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    assigneeId: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Task',

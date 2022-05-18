@@ -8,7 +8,7 @@ block content
       each error in errors
         li= error.message
 
-  form(action=`/teams/${team}/tasks`, method="post")
+  form(action=`/teams/${teamId}/tasks`, method="post")
     _csrf
     div
       label(for="title") タイトル
@@ -16,6 +16,11 @@ block content
     div  
       label(for="body") 内容
       textarea#body(name="body")=task.body
+    div 
+      label(for="assignee") 担当者
+      select(name="assigneeId")
+        each joinUser in joinUsers
+          option(value=joinUser.id) #{joinUser.displayName}
     div.actions-tasks
       input(type="submit")
     

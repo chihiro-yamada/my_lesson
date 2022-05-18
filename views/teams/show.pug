@@ -14,6 +14,7 @@ block content
       tr 
         th タスクID
         th タイトル
+        th 担当者
         th 作成日時
         th 操作
     tbody 
@@ -21,6 +22,7 @@ block content
         tr
           td= task.id
           td= task.title
+          td= task.assignUser.displayName
           td= helpers.formatDateTime(task.createdAt)
           td
             a(href=`/teams/${team.id}/tasks/${task.id}/edit`) 編集
