@@ -8,7 +8,7 @@ block content
       each error in errors
         li= error.message
 
-  form(action=`/manager/teams/${teamId}/tasks`, method="post")
+  form(action=`/teams/${teamId}/tasks`, method="post")
     _csrf
     div
       label(for="title") タイトル

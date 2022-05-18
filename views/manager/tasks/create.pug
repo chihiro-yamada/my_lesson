@@ -1,16 +1,15 @@
-extends ../layout
+extends ../../layout
 
 block content 
-  h1 タスクの編集
+  h1 タスクの新規作成
   - if(err)
     - const errors = err.errors
     ul.errors
       each error in errors
         li= error.message
-  form(action=`/teams/${teamId}/tasks/${task.id}`, method="post")
+
+  form(action=`/manager/teams/${teamId}/tasks`, method="post")
     _csrf
-    _method put
-    input(type='hidden', name='id', value=task.id)
     div
       label(for="title") タイトル
       input#title(name="title", value=task.title)
@@ -24,3 +23,4 @@ block content
           option(value=joinUser.id) #{joinUser.displayName}
     div.actions-tasks
       input(type="submit")
+    
