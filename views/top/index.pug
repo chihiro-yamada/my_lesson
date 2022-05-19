@@ -1,0 +1,52 @@
+extends ../layout
+block content
+  h2 アサインされているタスク
+  table(border=1)
+    thead 
+      tr 
+        th チーム
+        th タスクID
+        th タイトル
+        th 担当者
+        th 作成日時
+        th 操作
+    tbody 
+      each task in tasks
+        tr
+          td= task.OwnerTeam.name
+          td= task.id
+          td= task.title
+          td= user.displayName
+          td= helpers.formatDateTime(task.createdAt)
+          td
+            a(href=`/tasks/${task.id}`) 詳細
+
+  h2 所属しているチーム
+  div.create
+    a(href=`/teams/create`) チーム作成
+  table(border=1)
+    thead 
+      tr 
+        th チーム
+        th 名前
+        th 役割
+        th 作成日時
+        th 操作
+    tbody 
+      each member in members
+        tr
+          -if (member.role === 1)
+            td= member.teamId
+            td= member.OwnerTeam.name
+            td= "マネージャー"
+            td= helpers.formatDateTime(member.OwnerTeam.createdAt)
+            td
+              a(href=`/manager/teams/${member.teamId}`) 管理
+          -else
+            td= member.teamId
+            td= member.OwnerTeam.name
+            td= "一般ユーザー"
+            td= helpers.formatDateTime(member.OwnerTeam.createdAt)
+            td
+  
+

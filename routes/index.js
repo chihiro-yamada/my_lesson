@@ -6,9 +6,7 @@ const forceManage = require('../app/middlewares/managable_team');
 const route = new Route();
 
 // function style
-route.get('/', function (req, res, _next) {
-  res.render('index', { title: 'Express', user: req.user });
-});
+route.get('/', 'top_controller@index');
 
 // single style
 route.get('/user/edit', forceLogin, 'users_controller@edit');
@@ -30,17 +28,17 @@ managerRoute.resource('teams', forceManage, { controller: 'manager/teams_control
 
 
 //teamのURL階層の作成
-const teamRoute = route.sub('/teams/:team', forceLogin);
+//const teamRoute = route.sub('/teams/:team', forceLogin);
 
 //manager/teamのURL階層の作成
 const teamManagerRoute = managerRoute.sub('/teams/:team', forceManage);
 
 //tasks routes
-teamRoute.resource('tasks', { controller: 'tasks_controller', only: ['create', 'store', 'edit', 'update'] });
+route.resource('tasks', { controller: 'tasks_controller', only: ['show'] });
 teamManagerRoute.resource('tasks', { controller: 'manager/tasks_controller', only: ['create', 'store', 'edit', 'update'] });
 
 //members routes
-teamRoute.resource('members', { controller: 'members_controller', only: ['index', 'store'] });
+//teamRoute.resource('members', { controller: 'members_controller', only: ['index', 'store'] });
 teamManagerRoute.resource('members', { controller: 'manager/members_controller', only: ['index', 'store'] });
 
 
