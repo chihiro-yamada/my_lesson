@@ -1,7 +1,7 @@
-const Controller = require('./controller');
-const models = require('../models');
+const Controller = require('../controller');
+const models = require('../../models');
 const { ValidationError } = require('sequelize');
-const task = require('../models/task');
+const task = require('../../models/task');
 
 class TasksController extends Controller {
   // GET /create
@@ -9,7 +9,7 @@ class TasksController extends Controller {
     const teamId = req.params.team;
     const team = await models.Team.findByPk(teamId);
     const joinUsers = await team.getJoinUsers();
-    res.render('tasks/create', { teamId: teamId, task: task, joinUsers: joinUsers });
+    res.render('manager/tasks/create', { teamId: teamId, task: task, joinUsers: joinUsers });
   }
 
   // POST /
@@ -27,10 +27,10 @@ class TasksController extends Controller {
       
       await task.save({ fields: ['title', 'body', 'teamId', 'status', 'creatorId', 'assigneeId'] });
       await req.flash('info', `新規チーム${task.title}保存しました`);
-      res.redirect(`/teams/${task.teamId}`);
+      res.redirect(`/manager/teams/${task.teamId}`);
     } catch (err) {
       if (err instanceof ValidationError) {
-        res.render('tasks/create', { task: req.body, err });
+        res.render('manager/tasks/create', { task: req.body, err });
       } else {
         throw err;
       }
@@ -42,7 +42,7 @@ class TasksController extends Controller {
     const team = await models.Team.findByPk(teamId);
     const task = await models.Task.findByPk(req.params.task);
     const joinUsers = await team.getJoinUsers();
-    res.render('tasks/edit', { teamId: teamId, task: task, joinUsers: joinUsers });
+    res.render('manager/tasks/edit', { teamId: teamId, task: task, joinUsers: joinUsers });
   }
 
   // PUT or PATCH /:id
@@ -52,10 +52,10 @@ class TasksController extends Controller {
       task.set(req.body);
       await task.save({ fields: ['title', 'body', 'assigneeId'] });
       await req.flash('info', `${task.title}を変更しました`);
-      res.redirect(`/teams/${task.teamId}`);
+      res.redirect(`/manager/teams/${task.teamId}`);
     } catch (err) {
       if (err instanceof ValidationError) {
-        res.render('tasks/edit', { task: req.body, err });
+        res.render('manager/tasks/edit', { task: req.body, err });
       } else {
         throw err;
       }

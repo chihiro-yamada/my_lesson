@@ -1,4 +1,4 @@
-extends ../layout
+extends ../../layout
 block content
   h1 チーム編集
 
@@ -8,7 +8,7 @@ block content
       each error in errors
         li= error.message
 
-  form.box(action=`/teams/${team.id}`, method="post")
+  form.box(action=`/manager/teams/${team.id}`, method="post")
     _csrf
     _method put
     input(type='hidden', name='id', value=team.id)

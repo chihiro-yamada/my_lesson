@@ -1,4 +1,4 @@
-extends ../layout
+extends ../../layout
 block content
   h1 新メンバー追加
   - if(err)
@@ -7,13 +7,14 @@ block content
       each error in errors
         li= error.message
   - else
-    form(action=`/teams/${team.id}/members`, method="post")
+    form(action=`/manager/teams/${team.id}/members`, method="post")
       _csrf  
       select(name="name")
         each user in users
           option(value=user.id) #{user.displayName}
 
       input(type="submit", value="追加")
+      
     h2 メンバー一覧
     table(border=1)
       thead 
@@ -24,4 +25,4 @@ block content
         each joinUser in joinUsers
           tr
             td メンバー
-            td= joinUser.OwnerUser.displayName
+            td= joinUser.displayName
