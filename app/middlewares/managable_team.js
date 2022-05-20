@@ -1,8 +1,9 @@
+const models = require('../models');
 module.exports = async function forceManage(req, res, next) {
-  const member = await req.user.getOwnMembers({ where: { teamId: req.params.team, role: 1 } });
-  if (member.length > 0) {
-    return next();
+  const team = await models.Team.findByPk(req.params.team);
+  if (!await team.isManager(req.user)) {
+    await req.flash('alert', 'アクセスできません');
+    res.redirect('/');
   }
-  await req.flash('alert', 'アクセス権限がありません');
-  res.redirect('/login');
+  return next();
 };

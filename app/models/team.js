@@ -26,9 +26,11 @@ module.exports = (sequelize, DataTypes) => {
       await team.createOwnMember({ teamId: team.id, userId: user.id, role: 1 });
       return team;
     }
-    // isManager(user) {
-    //   const member = await user.getOwnMembers({ where: { teamId: req.params.team, role: 1 } });
-    // }
+    async isManager(user) {
+      const member = await user.getUserMembers({ where: { teamId: this.id, role: 1 } });
+      const check = Boolean(member.length);
+      return check;
+    }
   }
   Team.init({
     name: {
