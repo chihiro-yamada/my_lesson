@@ -18,6 +18,18 @@ module.exports = (sequelize, DataTypes) => {
         as: 'OwnMembers'
       });
     }
+    static async createWithOwner(user, body) {
+      const team = await this.create({
+        name: body.name,
+        ownerId: user.id
+      });
+      await team.createOwnMember({ teamId: team.id, userId: user.id, role: 1 });
+      return team;
+    }
+    async isManager(user) {
+      const member = await user.getUserMembers({ where: { teamId: this.id, role: 1 } });
+      return Boolean(member.length);
+    }
   }
   Team.init({
     name: {
