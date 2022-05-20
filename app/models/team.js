@@ -35,8 +35,9 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
       validate: {
-        notEmpty: true,
-        len: [0, 20],
+        notEmpty: {
+          msg: 'チーム名は必須です'
+        }
       }
     },
     ownerId: DataTypes.INTEGER
