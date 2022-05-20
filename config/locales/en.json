@@ -1,7 +1,11 @@
 {
 	"AppTitle": "ExpressMVC",
 	"views": {
-		"Profile": "Profile"
+		"Profile": "Profile",
+		"Message": { 
+			"AssignedTasks": "Assigned tasks",
+			"BelongTeam": "Team to belong"
+		} 
 	},
 	"models": {
 		"User": {

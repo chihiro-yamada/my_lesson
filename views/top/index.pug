@@ -1,6 +1,6 @@
 extends ../layout
 block content
-  h2 アサインされているタスク
+  h2= __('views.Message.AssignedTasks')
   table(border=1)
     thead 
       tr 
@@ -21,7 +21,7 @@ block content
           td
             a(href=`/tasks/${task.id}`) 詳細
 
-  h2 所属しているチーム
+  h2= __('views.Message.BelongTeam')
   div.create
     a(href=`/teams/create`) チーム作成
   table(border=1)
