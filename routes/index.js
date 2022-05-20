@@ -36,5 +36,4 @@ teamManagerRoute.resource('tasks', { controller: 'manager/tasks_controller', onl
 //members routes
 teamManagerRoute.resource('members', { controller: 'manager/members_controller', only: ['index', 'store'] });
 
-
 module.exports = route.router;

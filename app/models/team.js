@@ -19,14 +19,16 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
     static async createWithOwner(user, body) {
-      const team = this.build({
+      const team = await this.create({
         name: body.name,
         ownerId: user.id
       });
-      await team.save({ fields: ['name', 'ownerId'] });
-      await team.createMember({ teamId: team.id, userId: user.id, role: 1 });
+      await team.createOwnMember({ teamId: team.id, userId: user.id, role: 1 });
       return team;
     }
+    // isManager(user) {
+    //   const member = await user.getOwnMembers({ where: { teamId: req.params.team, role: 1 } });
+    // }
   }
   Team.init({
     name: {
