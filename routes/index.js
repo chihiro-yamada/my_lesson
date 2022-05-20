@@ -1,6 +1,7 @@
 const { Route } = require('../lib/route');
 const forceLogin = require('../app/middlewares/force_login');
 const forceAdmin = require('../app/middlewares/force_admin');
+const forceManage = require('../app/middlewares/managable_team');
 
 const route = new Route();
 
@@ -25,15 +26,16 @@ const managerRoute = route.sub('/manager', forceLogin);
 
 //team routes
 route.resource('teams', forceLogin, { controller: 'teams_controller', only: ['create', 'store'] });
-managerRoute.resource('teams', { controller: 'manager/teams_controller', only: ['show', 'edit', 'update'] });
+managerRoute.resource('teams', forceManage, { controller: 'manager/teams_controller', only: ['show', 'edit', 'update'] });
 
 //manager/teamのURL階層の作成
-const teamManagerRoute = managerRoute.sub('/teams/:team');
+const teamManagerRoute = managerRoute.sub('/teams/:team', forceManage);
 
 //tasks routes
 teamManagerRoute.resource('tasks', { controller: 'manager/tasks_controller', only: ['create', 'store', 'edit', 'update'] });
 
 //members routes
 teamManagerRoute.resource('members', { controller: 'manager/members_controller', only: ['index', 'store'] });
+
 
 module.exports = route.router;

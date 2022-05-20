@@ -20,7 +20,7 @@ block content
       label(for="assignee") 担当者
       select(name="assigneeId")
         each joinUser in joinUsers
-          option(value=joinUser.id) #{joinUser.displayName}
+          option(value=joinUser.OwnerUser.id) #{joinUser.OwnerUser.displayName}
     div.actions-tasks
       input(type="submit")
     

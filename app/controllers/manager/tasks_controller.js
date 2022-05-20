@@ -8,7 +8,7 @@ class TasksController extends Controller {
   async create(req, res) {
     const teamId = req.params.team;
     const team = await models.Team.findByPk(teamId);
-    const joinUsers = await team.getJoinUsers();
+    const joinUsers = await team.getOwnMembers({ include: 'OwnerUser' });
     res.render('manager/tasks/create', { teamId: teamId, task: task, joinUsers: joinUsers });
   }
 
@@ -41,7 +41,7 @@ class TasksController extends Controller {
     const teamId = req.params.team;
     const team = await models.Team.findByPk(teamId);
     const task = await models.Task.findByPk(req.params.task);
-    const joinUsers = await team.getJoinUsers();
+    const joinUsers = await team.getOwnMembers({ include: 'OwnerUser' });
     res.render('manager/tasks/edit', { teamId: teamId, task: task, joinUsers: joinUsers });
   }
 
