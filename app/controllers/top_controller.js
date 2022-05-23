@@ -3,6 +3,7 @@ const Controller = require('./controller');
 class TopController extends Controller {
   // GET /create
   async index(req, res) {
+    req.setLocale(req.query.lang || 'ja'); 
     if (req.user) {
       const user = req.user;
       const tasks = await user.getOwnTasks({ include: 'OwnerTeam' });
