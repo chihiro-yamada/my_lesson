@@ -23,15 +23,22 @@ module.exports = (sequelize, DataTypes) => {
     title: {
       type: DataTypes.STRING,
       validate: {
-        notEmpty: true,
-        len: [0, 20],
+        notEmpty: {
+          msg: 'タイトルは空ではいけません'
+        },
+        len: {
+          msg: 'タイトルは10文字未満です',
+          args: [0, 10]
+        }
       },
     },
     body: {
       type: DataTypes.STRING,
       validate: {
-        notEmpty: true,
-        len: [0, 20],
+        len: {
+          msg: '本文は30文字未満です',
+          args: [0, 30]
+        }
       },
     },
     teamId: {

@@ -6,10 +6,9 @@ const task = require('../../models/task');
 class TasksController extends Controller {
   // GET /create
   async create(req, res) {
-    const teamId = req.params.team;
-    const team = await models.Team.findByPk(teamId);
+    const team = await models.Team.findByPk(req.params.team);
     const joinUsers = await team.getOwnMembers({ include: 'OwnerUser' });
-    res.render('manager/tasks/create', { teamId: teamId, task: task, joinUsers: joinUsers });
+    res.render('manager/tasks/create', { team: team, task: task, joinUsers: joinUsers });
   }
 
   // POST /
@@ -30,7 +29,9 @@ class TasksController extends Controller {
       res.redirect(`/manager/teams/${task.teamId}`);
     } catch (err) {
       if (err instanceof ValidationError) {
-        res.render('manager/tasks/create', { task: req.body, err });
+        const team = await models.Team.findByPk(req.params.team);
+        const joinUsers = await team.getOwnMembers({ include: 'OwnerUser' });
+        res.render('manager/tasks/create', { task: req.body, team: team, joinUsers: joinUsers, err });
       } else {
         throw err;
       }
@@ -38,11 +39,10 @@ class TasksController extends Controller {
   }
   // GET /:id/edit
   async edit(req, res) {
-    const teamId = req.params.team;
-    const team = await models.Team.findByPk(teamId);
+    const team = await models.Team.findByPk(req.params.team);
     const task = await models.Task.findByPk(req.params.task);
     const joinUsers = await team.getOwnMembers({ include: 'OwnerUser' });
-    res.render('manager/tasks/edit', { teamId: teamId, task: task, joinUsers: joinUsers });
+    res.render('manager/tasks/edit', { team: team, task: task, joinUsers: joinUsers });
   }
 
   // PUT or PATCH /:id
@@ -55,7 +55,9 @@ class TasksController extends Controller {
       res.redirect(`/manager/teams/${task.teamId}`);
     } catch (err) {
       if (err instanceof ValidationError) {
-        res.render('manager/tasks/edit', { task: req.body, err });
+        const team = await models.Team.findByPk(req.params.team);
+        const joinUsers = await team.getOwnMembers({ include: 'OwnerUser' });
+        res.render('manager/tasks/edit', { task: req.body, team: team, joinUsers: joinUsers, err });
       } else {
         throw err;
       }
