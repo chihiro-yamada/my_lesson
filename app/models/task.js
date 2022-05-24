@@ -22,6 +22,23 @@ module.exports = (sequelize, DataTypes) => {
         as: 'OwnComments'
       });
     }
+    static async finish(paramsTask, user, body) {
+      if (body.finished.length > 1) {
+        body.finished = body.finished[1];
+      }
+      const task = await this.findByPk(paramsTask);
+      const comment = await task.createOwnComment({
+        taskId: task.id,
+        creatorId: user.id,
+        message: body.message,
+        kind: body.finished
+      });
+      if (comment.kind == 1) {
+        task.set({ status: 1 });
+        await task.save({ fields: ['status'] });
+      }
+      return comment;
+    }
   }
   Task.init({
     title: {
