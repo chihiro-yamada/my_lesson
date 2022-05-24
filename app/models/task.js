@@ -17,6 +17,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'creatorId',
         as: 'createUser'
       });
+      this.Comments = this.hasMany(models.Comment, {
+        foreignKey: 'taskId',
+        as: 'OwnComments'
+      });
     }
   }
   Task.init({

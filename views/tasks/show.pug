@@ -4,4 +4,26 @@ block content
   h2 内容
   div
     p #{task.body}
+  h2 コメント
+  ul.comments 
+    each comment in comments 
+      div.message
+        li= comment.message
+      div.creatorId
+        li= helpers.formatDateTime(comment.createdAt)
+        li= comment.CreateUser.displayName
+  form(action=`/tasks/${task.id}/comments`, method="post")
+    _csrf
+    div  
+      label(for="message") メッセージ
+      textarea#message(name="message")
+    div.actions
+      div.checkbox
+        input(name="finished", type="hidden", value="0")
+        -if (task.status === 1)
+          p 既に報告済みです
+        -else 
+          label(for="finished") 完了報告
+          input(name="finished", type="checkbox", value="1")
+      input(type="submit", value='送信')
 
