@@ -17,6 +17,33 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'creatorId',
         as: 'createUser'
       });
+      this.Comments = this.hasMany(models.Comment, {
+        foreignKey: 'taskId',
+        as: 'OwnComments'
+      });
+    }
+    static async createComment(paramsTask, user, body) {
+      const task = await this.findByPk(paramsTask);
+      const comment = await task.createOwnComment({
+        taskId: task.id,
+        creatorId: user.id,
+        message: body.message,
+        kind: body.finished
+      });
+      return comment;
+    }
+    static async finish(paramsTask, user, body) {
+      body.finished = body.finished[1];
+      const task = await this.findByPk(paramsTask);
+      const comment = await task.createOwnComment({
+        taskId: task.id,
+        creatorId: user.id,
+        message: body.message,
+        kind: body.finished
+      });
+      task.set({ status: 1 });
+      await task.save({ fields: ['status'] });
+      return comment;
     }
   }
   Task.init({

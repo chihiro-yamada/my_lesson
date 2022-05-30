@@ -27,6 +27,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'assigneeId',
         as: 'OwnTasks'
       });
+      this.Comments = this.hasMany(models.Comment, {
+        foreignKey: 'creatorId',
+        as: 'OwnComments'
+      });
     }
     static async generateHash(password) {
       return await bcrypt.hash(password, 10);

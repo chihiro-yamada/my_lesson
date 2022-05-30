@@ -30,10 +30,12 @@ managerRoute.resource('teams', forceManage, { controller: 'manager/teams_control
 const teamManagerRoute = managerRoute.sub('/teams/:team', forceManage);
 
 //tasks routes
-route.resource('tasks', { controller: 'tasks_controller', only: ['show'] });
+route.resource('tasks', forceLogin, { controller: 'tasks_controller', only: ['show'] });
 teamManagerRoute.resource('tasks', { controller: 'manager/tasks_controller', only: ['create', 'store', 'edit', 'update'] });
 
 //members routes
 teamManagerRoute.resource('members', { controller: 'manager/members_controller', only: ['index', 'store'] });
 
+//comments routes
+route.post('/tasks/:task/comments', forceLogin, 'comments_controller@store');
 module.exports = route.router;

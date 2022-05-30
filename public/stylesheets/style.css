@@ -54,3 +54,11 @@ header>nav {
 .create {
   text-align: right;
 }
+
+label[for="message"] {
+  display: block;
+}
+
+.creatorId li {
+  display: inline;
+}
